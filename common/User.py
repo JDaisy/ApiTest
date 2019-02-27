@@ -28,21 +28,23 @@ class User:
                    }
         res = self.s.post(url, data=payload, headers=headers, verify=False)
         result = res.json()
-        return result
+        guid = result["data"]["guid"]
+        token = result["data"]["token"]
+        user_info = {"guid": guid,
+                     "token": token
+                     }
+        return user_info
 
     def get_guid(self):
-        result = str(self.login()["data"]["guid"])
+        result = self.login()["guid"]
         return result
 
     def get_token(self):
-        result = self.login()["data"]["token"]
+        result = self.login()["token"]
         return result
 
 
 if __name__ == '__main__':
-    s = requests.session()
+    s = requests
     user = User(s)
-    guid = user.get_guid()
-    token = user.get_token()
-    print(type(guid))
-    print(type(token))
+    print(user.login())
