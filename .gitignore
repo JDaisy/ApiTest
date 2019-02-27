@@ -1,0 +1,10 @@
+## ignore this file ##
+/venv/
+/case/**/schema/*
+.idea/
+/**/__pycache__/
+*.DS_Store
+*.log
+*.xlsx
+*.html
+
