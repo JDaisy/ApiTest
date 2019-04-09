@@ -2,9 +2,12 @@
 # -*- coding: utf-8 -*-
 
 import unittest
+import requests
 import HTMLTestRunner
 import os
 import time
+from common.User import User
+from config.readcfg import ReadConfig
 
 # 当前脚本所在文件真实路径
 cur_path = os.path.dirname(os.path.realpath(__file__))
@@ -49,6 +52,14 @@ def get_report_file(report_path):
 
 
 if __name__ == '__main__':
+    s = requests
+    # 用户登录
+    user = User(s)
+    user_info = user.login()
+    # 将此次登录的用户信息写入config文件
+    rc = ReadConfig()
+    rc.set_user_info(user_info)
+    # 用例
     test_case = add_case(case_name="case")
     run_case(test_case)
     rep_path = os.path.join(cur_path, "report")
